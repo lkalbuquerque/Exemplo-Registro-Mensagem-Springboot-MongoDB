@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/telefone")
@@ -29,5 +30,10 @@ public class TelefoneResource {
     public ResponseEntity<Telefone> findById (@PathVariable String id){
         Telefone telefone = dao.findById(id);
         return ResponseEntity.ok().body(telefone);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<Telefone>> findAll (){
+        return ResponseEntity.ok().body(dao.findAll());
     }
 }

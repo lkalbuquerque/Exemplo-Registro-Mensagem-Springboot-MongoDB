@@ -6,6 +6,7 @@ import com.lkalbuquerque.registromensagem.services.exception.ObjectNotFoundExcep
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +24,10 @@ public class TelefoneService {
     public Telefone findById(String id){
         Optional<Telefone> telefone = telefoneRepository.findById(id);
         return telefone.orElseThrow(()-> new ObjectNotFoundException("Não Encontrado"));
+    }
+
+    public List<Telefone> findAll (){
+        return telefoneRepository.findAll();
     }
 
 }
