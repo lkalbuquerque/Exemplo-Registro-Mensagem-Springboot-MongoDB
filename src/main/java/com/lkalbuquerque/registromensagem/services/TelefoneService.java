@@ -1,9 +1,12 @@
-package com.lkalbuquerque.registromensagem.service;
+package com.lkalbuquerque.registromensagem.services;
 
 import com.lkalbuquerque.registromensagem.domain.Telefone;
 import com.lkalbuquerque.registromensagem.repository.TelefoneRepository;
+import com.lkalbuquerque.registromensagem.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class TelefoneService {
@@ -15,6 +18,11 @@ public class TelefoneService {
 
     public Telefone insert (Telefone telefone){
         return telefoneRepository.insert(telefone);
+    }
+
+    public Telefone findById(String id){
+        Optional<Telefone> telefone = telefoneRepository.findById(id);
+        return telefone.orElseThrow(()-> new ObjectNotFoundException("Não Encontrado"));
     }
 
 }
