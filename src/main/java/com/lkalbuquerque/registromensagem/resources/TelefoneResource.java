@@ -1,5 +1,6 @@
 package com.lkalbuquerque.registromensagem.resources;
 
+import com.lkalbuquerque.registromensagem.domain.Mensagem;
 import com.lkalbuquerque.registromensagem.domain.Telefone;
 import com.lkalbuquerque.registromensagem.services.TelefoneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,13 @@ public class TelefoneResource {
         tel.setId(id);
         tel = dao.update(tel);
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}/mensagens")
+    public ResponseEntity<List<Mensagem>> findMensagem (@PathVariable String id){
+        Telefone tel = dao.findById(id);
+        return ResponseEntity.ok().body(tel.getMensagens());
+
     }
 
 }
