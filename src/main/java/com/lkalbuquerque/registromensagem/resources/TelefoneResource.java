@@ -36,4 +36,18 @@ public class TelefoneResource {
     public ResponseEntity<List<Telefone>> findAll (){
         return ResponseEntity.ok().body(dao.findAll());
     }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public ResponseEntity<Void> update (@PathVariable String id){
+        dao.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
+    public ResponseEntity<Void> update(@RequestBody Telefone tel, @PathVariable String id){
+        tel.setId(id);
+        tel = dao.update(tel);
+        return ResponseEntity.noContent().build();
+    }
+
 }

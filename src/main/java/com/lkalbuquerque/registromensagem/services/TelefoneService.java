@@ -30,4 +30,13 @@ public class TelefoneService {
         return telefoneRepository.findAll();
     }
 
+    public void delete (String id){
+        telefoneRepository.deleteById(id);
+    }
+
+    public Telefone update (Telefone tel){
+        //Telefone tel2 = findById(tel.getId());
+        return telefoneRepository.save(tel);
+    }
+
 }
