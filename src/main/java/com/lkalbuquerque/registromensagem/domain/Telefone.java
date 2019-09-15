@@ -1,9 +1,12 @@
 package com.lkalbuquerque.registromensagem.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Document
@@ -15,6 +18,9 @@ public class Telefone implements Serializable {
     private String numeroTelefone;
     private String nome;
     private String smartphone;
+
+    @DBRef(lazy = true)
+    private List<Mensagem> mensagens = new ArrayList<>();
 
     public Telefone() {
     }
@@ -37,6 +43,14 @@ public class Telefone implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public List<Mensagem> getMensagens() {
+        return mensagens;
+    }
+
+    public void setMensagens(List<Mensagem> mensagens) {
+        this.mensagens = mensagens;
     }
 
     public String getId() {
